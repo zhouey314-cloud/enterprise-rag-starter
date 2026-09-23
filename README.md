@@ -1,5 +1,7 @@
 # Enterprise RAG Starter
 
+**LIVE_DEMO (lexical) + LOCAL semantic/hybrid** · [Try the browser demo](https://zhouey314-cloud.github.io/enterprise-rag-starter/) · [Case study](docs/case-study.md) · [Resume bullets](docs/resume-bullets.md) · [Interview notes](docs/interview-notes.md)
+
 An inspectable RAG demo using entirely fictional enterprise documents. The online page is a lexical baseline; optional local Python modes use a real sentence-embedding model for semantic and hybrid retrieval. Each mode extracts a source sentence with citation or reports insufficient evidence.
 
 ![Architecture](docs/images/architecture.svg)
