@@ -1,0 +1,4 @@
+{"id":"q1","question":"What are the support hours?","expected_doc":"support","provenance":"synthetic_unverified"}
+{"id":"q2","question":"How many return days?","expected_doc":"returns","provenance":"synthetic_unverified"}
+{"id":"q3","question":"What is the internal onboarding guide?","expected_doc":null,"scope":"public","provenance":"synthetic_unverified"}
+{"id":"q4","question":"What is the warranty for a lunar engine?","expected_doc":null,"provenance":"synthetic_unverified"}

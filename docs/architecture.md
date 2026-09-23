@@ -1,0 +1,3 @@
+# Architecture and known failures
+
+`rag.py` keeps parsing/chunking, provider interfaces, retrieval, reranking and answer construction separate. The lexical baseline counts query overlap in body and title after access filtering. It can miss synonyms and may surface an irrelevant sentence from a relevant document. A citation proves which chunk was used, not that the answer is semantically correct. The Golden Set is synthetic and unverified by a business expert. Production extension: typed parser results, incremental ingestion, document versioning, ACL-aware hybrid index, reranker with trace, model groundedness rubric and human-reviewed regression cases.
