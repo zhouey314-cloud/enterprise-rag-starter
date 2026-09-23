@@ -1,15 +1,21 @@
-# Resume bullets
+# 企业 RAG Starter — 中文简历项目要点
 
-These bullets describe the public synthetic demo only. Do not claim production use.
+仅描述公开仓库内可核查的自建演示；按岗位挑选，勿三版叠加。证据与边界以 README、测试和 [case study](case-study.md) 为准。
 
-## 中文简历版本
+## AI Engineer / FDE
 
-- 实现合成企业 RAG 演示：在线词面检索、本地真实 embedding 语义检索及混合排序，包含分块、访问过滤、引用与拒答；19 项测试、4 项词面夹具及本地模式评估。
-- 设计可复用的输入、状态与失败边界；通过仓库 README、架构图与示例输出展示实现方式。
-- 区分离线测试、合成夹具和真实外部验证；避免将 Mock 结果写成生产效果。
+- 围绕“知识检索需要来源可追溯、权限边界与证据不足时拒答”，用 Python、静态浏览器演示、sentence-transformers 实现词面检索、可选真实 embedding 语义检索和混合排序，带访问过滤、引用与拒答。
+- 验证：19 项单元测试；本地合成模式评估词面 5/5、语义 8/8、混合 8/8；本地用真实 embedding 模型测试合成检索案例；没有生成模型质量结论。
+- 明确边界：线上静态页只运行词面模式；评估集是 synthetic_unverified，非业务正确率。
 
-## English resume version
+## AI Product / Solution
 
-- Built a synthetic RAG demo with online lexical retrieval and local embedding-based semantic/hybrid modes, access filtering, citations and no-answer behavior; 19 tests and 4 lexical fixtures pass.
-- Documented the architecture, state transitions and failure paths with runnable examples and repository evidence.
-- Separated local verification, synthetic fixtures and unverified external integrations in the public handoff.
+- 将“知识检索需要来源可追溯、权限边界与证据不足时拒答”拆成可点击的用户流程，交付词面检索、可选真实 embedding 语义检索和混合排序，带访问过滤、引用与拒答。
+- 用可运行 Demo、测试和案例页说明实现与限制；19 项单元测试；本地合成模式评估词面 5/5、语义 8/8、混合 8/8。
+- 为客户化落地列出前置条件：真实身份/文档 ACL、授权语料、人工核验 Golden Set、检索与生成链路追踪。
+
+## 实习 / 校招
+
+- 独立完成企业 RAG Starter的公开演示、代码、测试和文档，技术栈为 Python、静态浏览器演示、sentence-transformers。
+- 解决“避免语义分数让无权限或无证据内容进入答案”，保留可复核的验证：19 项单元测试；本地合成模式评估词面 5/5、语义 8/8、混合 8/8。
+- 不把演示包装成上线业务：线上静态页只运行词面模式；评估集是 synthetic_unverified，非业务正确率。

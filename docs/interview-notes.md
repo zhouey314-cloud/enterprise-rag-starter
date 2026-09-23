@@ -1,12 +1,29 @@
-# Interview notes
+# 企业 RAG Starter — 面试讲述卡
 
-1. **Why?** To make enterprise rag starter an inspectable portfolio artifact.
-2. **Hardest problem?** Citations and no-answer.
-3. **Why this architecture?** Keep policy and workflow logic independent from transport and external providers.
-4. **Where is AI?** The design marks provider boundaries; any disconnected model remains unverified.
-5. **What stays human?** Final review, business truth and any external release decision.
-6. **How verified?** Run the tests and sample commands in README; inspect their exact scope.
-7. **Failure learned?** Lexical retrieval cannot establish semantic answer quality.
-8. **Redo?** Add reviewed cases and a narrower production migration path.
-9. **Production scale?** Add real auth, durable storage, observability, privacy review and provider-backed evals where relevant.
-10. **My contribution?** Independent clean-room code, tests, docs and public release; no company source copied.
+## 60 秒
+
+我做这个自建项目是为了解决“知识检索需要来源可追溯、权限边界与证据不足时拒答”。用 Python、静态浏览器演示、sentence-transformers 做了词面检索、可选真实 embedding 语义检索和混合排序，带访问过滤、引用与拒答。最难的是避免语义分数让无权限或无证据内容进入答案。目前证据是19 项单元测试；本地合成模式评估词面 5/5、语义 8/8、混合 8/8。但线上静态页只运行词面模式；评估集是 synthetic_unverified，非业务正确率；如果真实落地，下一步是真实身份/文档 ACL、授权语料、人工核验 Golden Set、检索与生成链路追踪。
+
+## 3 分钟
+
+先演示核心路径：词面检索、可选真实 embedding 语义检索和混合排序，带访问过滤、引用与拒答。再打开仓库中的测试与案例页，解释为什么把状态/证据留在可检查的位置。重点讲一个取舍：避免语义分数让无权限或无证据内容进入答案。最后明确验证范围：19 项单元测试；本地合成模式评估词面 5/5、语义 8/8、混合 8/8；本地用真实 embedding 模型测试合成检索案例；没有生成模型质量结论。不把演示、合成样本和生产效果混为一谈。
+
+## 10 分钟技术深挖
+
+1. 展示 README 的 Quick Start 与架构图/目录。
+2. 从一个输入走到状态变化或输出，指出 词面检索、可选真实 embedding 语义检索和混合排序，带访问过滤、引用与拒答 对应的源代码。
+3. 现场说明最难问题：避免语义分数让无权限或无证据内容进入答案；对照测试或复现步骤。
+4. 解释失败路径及限制：线上静态页只运行词面模式；评估集是 synthetic_unverified，非业务正确率。
+5. 用 真实身份/文档 ACL、授权语料、人工核验 Golden Set、检索与生成链路追踪 说明真正上线的优先级和验收证据。
+
+## 九个常见追问
+
+1. **为什么这样设计架构？** 为了把 词面检索、可选真实 embedding 语义检索和混合排序，带访问过滤、引用与拒答 的核心规则与展示/外部依赖分开，便于检查失败边界。
+2. **最难的 bug/取舍？** 避免语义分数让无权限或无证据内容进入答案；请指向对应测试或演示复现，避免编造线上事故。
+3. **用了什么框架？** Python、静态浏览器演示、sentence-transformers。选型服务于静态或离线演示，不等同生产选型结论。
+4. **上线还差什么？** 真实身份/文档 ACL、授权语料、人工核验 Golden Set、检索与生成链路追踪。
+5. **如何防止误用？** 线上静态页只运行词面模式；评估集是 synthetic_unverified，非业务正确率；任何不可逆外部动作需人工确认。
+6. **怎么测试？** 19 项单元测试；本地合成模式评估词面 5/5、语义 8/8、混合 8/8。先跑 README 命令，再看具体断言，不把 200 或编译当成产品验收。
+7. **AI 在哪里？** 本地用真实 embedding 模型测试合成检索案例；没有生成模型质量结论。不要把确定性规则、提示词或可选模型接口说成已验证的 AI 效果。
+8. **哪些是 Mock？** 线上静态页只运行词面模式；评估集是 synthetic_unverified，非业务正确率。
+9. **模型怎么评测？个人贡献是什么？** 本地用真实 embedding 模型测试合成检索案例；没有生成模型质量结论。我负责公开仓库里可见的实现、测试和说明；未核验的业务结果与第三方工作不纳入我的贡献。
