@@ -4,6 +4,10 @@
 
 An inspectable RAG demo using entirely fictional enterprise documents. The online page is a lexical baseline; optional local Python modes use a real sentence-embedding model for semantic and hybrid retrieval. Each mode extracts a source sentence with citation or reports insufficient evidence.
 
+![Real browser capture of the synthetic lexical query with extractive answer and citation](docs/images/demo-query.png)
+
+The image is a capture of the public lexical demo, not a generative model answer or production quality result.
+
 ![Architecture](docs/images/architecture.svg)
 
 ## Demo
