@@ -36,6 +36,8 @@ Documents → parse → overlap chunk → metadata/access → lexical or local e
 
 Nineteen tests cover chunking, access, citation, no-answer, top-K, mode routing and provider states. Four `synthetic_unverified` lexical fixtures remain as baseline; `evals/modes.py` checks retrieval Recall@1, citations, ACL, no-answer and top-K for lexical, semantic and hybrid, including paraphrases. The local semantic model was actually run; see [eval specification](evals/PROJECT_EVAL_SPEC.md). Answer quality from a generative model is `NOT_RUN`; extractive answers may still omit nuance. See [resume bullets](docs/resume-bullets.md) and [interview notes](docs/interview-notes.md).
 
-## Status, privacy and roadmap
+## Status, privacy and maintenance
 
 `IMPLEMENTED_AND_TESTED`: offline lexical retrieval, local optional semantic/hybrid retrieval, citation, access filter, deterministic synthetic fixtures. `DEPLOYED_STATIC_APP`: online lexical-only interface. `NOT_CONFIGURED`: generative LLM and external vector store. `NOT_IMPLEMENTED`: PDF parser, production authentication and provider-backed groundedness eval. All text is synthetic. Before production, add verified policy data, authenticated ACLs, expert-reviewed Golden Set and trace evaluation. MIT.
+
+This source currently has no declared package version. GitHub has a historical `v1.0.0` public demo Release; it is not evidence that this engineering reference is production-ready. A new version/tag requires a separate numbering and release decision. See the [capability roadmap](ROADMAP.md), [reproduced failure analysis](FAILURE_ANALYSIS.md), [changelog](CHANGELOG.md), [contribution guide](CONTRIBUTING.md), and [release checklist](docs/releases/RELEASE_CHECKLIST.md).
