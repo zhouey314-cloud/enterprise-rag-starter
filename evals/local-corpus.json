@@ -1,0 +1,901 @@
+{
+  "license": "MIT",
+  "provenance": {
+    "status": "synthetic_unverified",
+    "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+    "license": "MIT",
+    "human_review": "needs_human_review"
+  },
+  "documents": [
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "support-hours",
+        "title": "Support Hours",
+        "topic": "support-hours",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "viewer"
+      },
+      "format": "md",
+      "passages": [
+        "Legacybronze support hours are 08:00 to 16:00."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "support-hours",
+        "title": "Support Hours",
+        "topic": "support-hours",
+        "version": 2,
+        "effective_on": "2020-01-01",
+        "min_role": "viewer"
+      },
+      "format": "md",
+      "passages": [
+        "Support hours are 10:00 to 18:00 on weekdays."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "support-response",
+        "title": "Support Response",
+        "topic": "support-response",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "viewer"
+      },
+      "format": "md",
+      "passages": [
+        "Support response target is four hours."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "refund-window",
+        "title": "Refund Window",
+        "topic": "refund-window",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "viewer"
+      },
+      "format": "md",
+      "passages": [
+        "Refund window is fourteen days after purchase."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "receipt-deadline",
+        "title": "Receipt Deadline",
+        "topic": "receipt-deadline",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "team"
+      },
+      "format": "md",
+      "passages": [
+        "Receipt submission deadline is seven days."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "backup-frequency",
+        "title": "Backup Frequency",
+        "topic": "backup-frequency",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "team"
+      },
+      "format": "md",
+      "passages": [
+        "Backup frequency is daily at midnight."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "retention-period",
+        "title": "Retention Period",
+        "topic": "retention-period",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "viewer"
+      },
+      "format": "md",
+      "passages": [
+        "Message retention period is ninety days."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "password-length",
+        "title": "Password Length",
+        "topic": "password-length",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "viewer"
+      },
+      "format": "md",
+      "passages": [
+        "Password minimum length is sixteen characters."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "session-timeout",
+        "title": "Session Timeout",
+        "topic": "session-timeout",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "team"
+      },
+      "format": "md",
+      "passages": [
+        "Session timeout is fifteen minutes of inactivity."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "api-limit",
+        "title": "Api Limit",
+        "topic": "api-limit",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "team"
+      },
+      "format": "md",
+      "passages": [
+        "API request limit is sixty requests per minute."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "export-formats",
+        "title": "Export Formats",
+        "topic": "export-formats",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "viewer"
+      },
+      "format": "md",
+      "passages": [
+        "Export formats are CSV and JSON."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "upload-limit",
+        "title": "Upload Limit",
+        "topic": "upload-limit",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "viewer"
+      },
+      "format": "md",
+      "passages": [
+        "File upload limit is twenty megabytes."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "maintenance-schedule",
+        "title": "Maintenance Schedule",
+        "topic": "maintenance-schedule",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "viewer"
+      },
+      "format": "md",
+      "passages": [
+        "Maintenance schedule is Sunday at 02:00 UTC."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "incident-channel",
+        "title": "Incident Channel",
+        "topic": "incident-channel",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "team"
+      },
+      "format": "md",
+      "passages": [
+        "Incident reporting channel is the fictional red desk."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "approval-threshold",
+        "title": "Approval Threshold",
+        "topic": "approval-threshold",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "admin"
+      },
+      "format": "md",
+      "passages": [
+        "Purchase approval threshold is five hundred credits."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "key-rotation",
+        "title": "Key Rotation",
+        "topic": "key-rotation",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "admin"
+      },
+      "format": "md",
+      "passages": [
+        "Service key rotation interval is thirty days."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "travel-lodging",
+        "title": "Travel Lodging",
+        "topic": "travel-lodging",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "team"
+      },
+      "format": "md",
+      "passages": [
+        "Travel lodging ceiling is eighty credits per night."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "meal-allowance",
+        "title": "Meal Allowance",
+        "topic": "meal-allowance",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "team"
+      },
+      "format": "md",
+      "passages": [
+        "Meal allowance is twenty credits per day."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "reimbursement-currency",
+        "title": "Reimbursement Currency",
+        "topic": "reimbursement-currency",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "team"
+      },
+      "format": "md",
+      "passages": [
+        "Reimbursement currency is fictional credits."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "guest-duration",
+        "title": "Guest Duration",
+        "topic": "guest-duration",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "viewer"
+      },
+      "format": "md",
+      "passages": [
+        "Guest pass duration is eight hours."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "hardware-warranty",
+        "title": "Hardware Warranty",
+        "topic": "hardware-warranty",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "viewer"
+      },
+      "format": "md",
+      "passages": [
+        "Hardware warranty period is twelve months."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "training-budget",
+        "title": "Training Budget",
+        "topic": "training-budget",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "team"
+      },
+      "format": "md",
+      "passages": [
+        "Training budget is two hundred credits per year."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "leave-notice",
+        "title": "Leave Notice",
+        "topic": "leave-notice",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "team"
+      },
+      "format": "md",
+      "passages": [
+        "Leave request notice is three working days."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "meeting-duration",
+        "title": "Meeting Duration",
+        "topic": "meeting-duration",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "viewer"
+      },
+      "format": "md",
+      "passages": [
+        "Meeting default duration is twenty five minutes."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "timezone",
+        "title": "Timezone",
+        "topic": "timezone",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "viewer"
+      },
+      "format": "md",
+      "passages": [
+        "Service reporting timezone is UTC."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "availability-target",
+        "title": "Availability Target",
+        "topic": "availability-target",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "viewer"
+      },
+      "format": "md",
+      "passages": [
+        "Service availability target is ninety nine percent."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "deletion-grace",
+        "title": "Deletion Grace",
+        "topic": "deletion-grace",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "viewer"
+      },
+      "format": "md",
+      "passages": [
+        "Account deletion grace period is ten days."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "access-review",
+        "title": "Access Review",
+        "topic": "access-review",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "admin"
+      },
+      "format": "md",
+      "passages": [
+        "Privileged access review interval is monthly."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "attachment-limit",
+        "title": "Attachment Limit",
+        "topic": "attachment-limit",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "viewer"
+      },
+      "format": "md",
+      "passages": [
+        "Message attachment count limit is five files."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "travel-finance-pages",
+        "title": "Travel Finance Pages",
+        "topic": "travel-finance-pages",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "viewer"
+      },
+      "format": "pdf",
+      "passages": [
+        "Travel booking notice is ten working days.",
+        "Refund processing interval is five working days.",
+        "Invoice payment term is twenty days.",
+        "Equipment return window is six working days."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "people-handbook",
+        "title": "People Handbook",
+        "topic": "people-handbook",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "team"
+      },
+      "format": "docx",
+      "passages": [
+        "Onboarding checklist contains account review and safety briefing.",
+        "Remote work allowance is two days weekly.",
+        "Escalation priority for outages is urgent.",
+        "Audit archive duration is three years."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "visitor-code",
+        "title": "Visitor Code",
+        "topic": "visitor-code",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "viewer"
+      },
+      "format": "md",
+      "passages": [
+        "访客登记需要出示合成访客码。"
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "review-cycle",
+        "title": "Review Cycle",
+        "topic": "review-cycle",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "viewer"
+      },
+      "format": "md",
+      "passages": [
+        "文档复核周期为三十天。"
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "certificate-validity",
+        "title": "Certificate Validity",
+        "topic": "certificate-validity",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "viewer",
+        "expires_on": "2021-01-01"
+      },
+      "format": "md",
+      "passages": [
+        "Certificate validity period is two years."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "overtime-rate",
+        "title": "Overtime Rate",
+        "topic": "overtime-rate",
+        "version": 1,
+        "effective_on": "2999-01-01",
+        "min_role": "viewer"
+      },
+      "format": "md",
+      "passages": [
+        "Weekend overtime rate is two credits."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "shipping-origin",
+        "title": "Shipping Origin",
+        "topic": "shipping-origin",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "viewer"
+      },
+      "format": "md",
+      "passages": [
+        "Shipping origin is fictional Cedar depot."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      },
+      "delete_after_import": true
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "publication-grace",
+        "title": "Publication Grace",
+        "topic": "publication-grace",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "viewer"
+      },
+      "format": "md",
+      "passages": [
+        "Publication grace interval is nine days."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "publication-grace",
+        "title": "Publication Grace",
+        "topic": "publication-grace",
+        "version": 2,
+        "effective_on": "2999-01-01",
+        "min_role": "viewer"
+      },
+      "format": "md",
+      "passages": [
+        "Publication grace interval is twelve days."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "holiday-a",
+        "title": "Holiday A",
+        "topic": "holiday-allowance",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "viewer"
+      },
+      "format": "md",
+      "passages": [
+        "Holiday allowance is six days."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "holiday-b",
+        "title": "Holiday B",
+        "topic": "holiday-allowance",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "viewer"
+      },
+      "format": "md",
+      "passages": [
+        "Holiday allowance is nine days."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "locked-manual",
+        "title": "Locked Manual",
+        "topic": "locked-manual",
+        "version": 1,
+        "effective_on": "2020-01-01",
+        "min_role": "viewer"
+      },
+      "format": "md",
+      "passages": [
+        "Emergency recovery phrase is synthetic cobalt."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    },
+    {
+      "metadata": {
+        "tenant": "alpha",
+        "doc_id": "locked-manual",
+        "title": "Locked Manual",
+        "topic": "locked-manual",
+        "version": 2,
+        "effective_on": "2020-01-01",
+        "min_role": "admin"
+      },
+      "format": "md",
+      "passages": [
+        "Emergency recovery phrase is synthetic cobalt."
+      ],
+      "provenance": {
+        "status": "synthetic_unverified",
+        "origin": "Self-authored fictional policy fixture; expected labels are unreviewed candidates, not independent ground truth.",
+        "license": "MIT",
+        "human_review": "needs_human_review"
+      }
+    }
+  ]
+}

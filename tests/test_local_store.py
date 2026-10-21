@@ -44,6 +44,20 @@ class StoreTests(unittest.TestCase):
     def ingest(self, **changes):
         return self.store.ingest(self.path,replace(self.meta,**changes),rights_attested=True)
 
+    def test_english_present_tense_inflection_keeps_supported_answer(self):
+        self.path.write_text('Onboarding checklist contains account review and safety briefing.')
+        self.ingest(title='Onboarding checklist')
+        result=self.store.query(self.viewer,'What does the onboarding checklist contain?')
+        self.assertEqual(result['status'],'EXTRACTIVE')
+        self.assertIn('contains account review',result['answer'])
+        self.assertEqual(self.store.query(self.viewer,'What is the onboarding phone?')['status'],'NO_ANSWER')
+
+    def test_chinese_terminal_question_word_is_not_missing_evidence(self):
+        self.path.write_text('访客登记需要出示合成访客码。')
+        self.ingest(title='访客登记')
+        self.assertEqual(self.store.query(self.viewer,'访客登记需要什么？')['status'],'EXTRACTIVE')
+        self.assertEqual(self.store.query(self.viewer,'访客登记客服电话？')['status'],'NO_ANSWER')
+
     def test_identity_is_server_side_and_revocable(self):
         self.assertEqual(self.store.authenticate(self.viewer)['role'],'viewer')
         with self.assertRaises(PermissionError): self.store.authenticate('synthetic-invalid-token-123456')
