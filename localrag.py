@@ -16,10 +16,13 @@ ROLES = {'viewer': 0, 'team': 1, 'admin': 2}
 STOP = set('what is are the a an for to how does in of our policy can i do when many which please tell me about'.split())
 
 
-def terms(text):
-    english = re.findall(r'[a-z0-9]+', text.lower())
+def terms(text, *, question=False):
+    # Small lexical normalization, not semantic inference or a language model.
+    if question: text = re.sub(r'什么(?=[？?]?$)', '', text)
+    english = set(re.findall(r'[a-z0-9]+', text.lower())) - STOP
+    english = {word[:-1] if len(word)>4 and word.endswith('s') and not word.endswith(('ss','us','is')) else word for word in english}
     chinese = re.findall(r'[\u4e00-\u9fff]+', text)
-    return set(english) - STOP | {word[i:i+2] for word in chinese for i in range(max(1, len(word)-1))}
+    return english | {word[i:i+2] for word in chinese for i in range(max(1, len(word)-1))}
 
 
 @dataclass(frozen=True)
@@ -148,7 +151,7 @@ class KnowledgeStore:
         if not isinstance(question, str) or not question.strip() or len(question) > 2000: raise ValueError('INVALID_QUESTION')
         if type(top_k) is not int or not 1 <= top_k <= 10: raise ValueError('INVALID_TOP_K')
         candidates = self.eligible(identity, at)
-        query_terms = terms(question)
+        query_terms = terms(question, question=True)
         lookup = {str(row['chunk_id']): row for row in candidates}
         overlap = sorted([(key, len(query_terms & terms(row['title']+' '+row['text']))) for key,row in lookup.items()], key=lambda x:(-x[1],x[0]))
         overlap = [key for key, score in overlap if score > 0]

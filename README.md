@@ -14,7 +14,7 @@ The image is a capture of the public lexical demo, not a generative model answer
 
 Online lexical demo: <https://zhouey314-cloud.github.io/enterprise-rag-starter/>. Try support hours, refund policy, security, employee policy (public no-answer; team-scope fictional document visible), and no-answer. The page shows answer, source, retrieved chunks, scores, access and no-answer reason. Scope selection is illustrative, not real authentication.
 
-Python 3.10+: `python3 rag.py "What are the support hours?"`; `python3 rag.py "lunar engine warranty"`; `python3 -m unittest discover -s tests`; `python3 evals/run.py`.
+Python 3.10+: `python3 rag.py "What are the support hours?"`; `python3 rag.py "lunar engine warranty"`; `python3 evals/run.py`. For the full Python suite, first install `requirements-local.txt` in an isolated environment, then run `python3 -m unittest discover -s tests`; the file-format tests need the pinned PDF parser, with no model download.
 
 Local semantic/hybrid setup:
 
@@ -44,7 +44,9 @@ The trusted local operator must attest rights for each input. Tokens are opaque 
 
 `python local_service.py --help` exposes the trusted operator CLI. Use `init`, `issue-identity`, `ingest --metadata ... --rights-attested`, `delete` and `revoke-identity` locally. Identity files are created exclusively with mode `0600`; the token is never printed. `query --token-file ...` and `source DOC_ID VERSION --token-file ...` use that identity. `serve --port 8767` binds only `127.0.0.1`; clients send `Authorization: Bearer <token>` to `POST /query` with only `question` and optional `top_k`, or to `GET /sources/DOC_ID/VERSION`. Client-supplied tenant, role, scope, identity and historical dates are rejected. Source lookup repeats current-version/date/ACL checks. This service does not expose ingestion over HTTP or enable cross-origin browser access.
 
-Forty-three Python tests include real child-process CLI/HTTP checks for all three formats, token revocation, denied tenant/role access, updates/deletion, expiry/conflicts and malformed requests. Those tests discovered that a shared PDF title could make the wrong page appear answerable. Extraction now requires question-term coverage in the page body; titles still help retrieval. This remains a conservative lexical heuristic, not a semantic correctness check. An executable sample walkthrough and expanded human-review candidate eval follow in a separate review unit.
+The Python suite includes real child-process CLI/HTTP checks for all three formats, token revocation, denied tenant/role access, updates/deletion, expiry/conflicts and malformed requests. Those tests discovered that a shared PDF title could make the wrong page appear answerable. Extraction now requires question-term coverage in the page body; titles still help retrieval. This remains a conservative lexical heuristic, not a semantic correctness check.
+
+Follow [the complete fresh-environment quickstart](docs/local-quickstart.md) to generate fictional MIT-licensed MD/PDF/DOCX files, provision private identities, import/update/delete, start the HTTP service, query and inspect sources, and reproduce denial and revocation. No model or embedding is called. Run `python evals/local.py` for 62 `synthetic_unverified` candidate cases (56 distinct questions), with separate retrieval, citation, literal-answer agreement, refusal and observed p50/p95 metrics. The required lexical contract covers 60 cases; two semantic-paraphrase probes remain visible failures in the full metrics. All 62 await human review; semantic quality is `NOT_TESTED` and overall/production acceptance stays `BLOCKED` even when the mechanical CI gate passes. See [the candidate eval contract](evals/LOCAL_EVAL_SPEC.md) and [human-review queue](evals/local-human-review.jsonl).
 
 ## Status, privacy and maintenance
 
