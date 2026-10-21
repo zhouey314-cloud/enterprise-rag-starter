@@ -1,0 +1,2 @@
+# Only PDF extraction needs a dependency. No model/provider/embedding dependencies.
+pypdf==6.20.0
