@@ -1,0 +1,28 @@
+{
+  "recorded_at_utc": "2026-10-21T13:48:48.386654+00:00",
+  "source_head": "4b70d1866c53007867724099620493264b58f19e",
+  "source_dataset_sha256": {
+    "evals/local-candidates.jsonl": "d84f70a1c28ad882bdb2138ecc96ea7e7aeab8d01c816b5b6283dbdf1e9cb8cb",
+    "evals/local-human-review.jsonl": "780df7770a9cc55069e79b663496441a5d2d5dbd473a6347fc6b768f7afa13fb"
+  },
+  "reviewed_case_count": 62,
+  "user_statement": "已经审过了，已经审过了这62个东西。",
+  "review_status": "USER_REVIEW_COMPLETED",
+  "history": [
+    {
+      "user_statement": "尚未逐条核对：保持62条待人审",
+      "status": "PENDING",
+      "superseded_by_latest_user_statement": true
+    }
+  ],
+  "individual_case_decisions": "Not individually supplied; no expected answers or case labels changed.",
+  "ground_truth_provenance": "Synthetic source/candidate provenance retained. Review completion does not by itself assert real-enterprise/model correctness.",
+  "remaining_known_failures": [
+    "semantic-paraphrase-support",
+    "semantic-paraphrase-refund"
+  ],
+  "raw_ci_artifact": "Preserved unchanged; its pending62 field describes the earlier run before this user statement.",
+  "reviewer": "user (project owner), as explicitly stated by the user; not an AI-generated adjudication",
+  "review_scope": "User reported completing review of all 62 candidate cases. Individual case decisions and business/model/production acceptance were not separately supplied.",
+  "current_status_resolution": "This later user statement supersedes the earlier pending-review statement. Raw CI pending62 fields and original candidate/queue files retain their earlier snapshot values unchanged."
+}
