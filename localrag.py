@@ -163,7 +163,8 @@ class KnowledgeStore:
         for ranking in (fts, overlap):
             for rank, key in enumerate(ranking): scores[key] = scores.get(key,0)+1/(60+rank+1)
         ranked = sorted(scores, key=lambda key:(-scores[key],key))
-        supported = [key for key in ranked if query_terms and len(query_terms & terms(lookup[key]['title']+' '+lookup[key]['text']))/len(query_terms) >= 0.8]
+        # A shared document title can retrieve a page, but cannot prove that page contains the answer.
+        supported = [key for key in ranked if query_terms and len(query_terms & terms(lookup[key]['text']))/len(query_terms) >= 0.8]
         reason = 'INSUFFICIENT_EVIDENCE'
         if supported:
             best = lookup[supported[0]]

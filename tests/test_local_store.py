@@ -132,6 +132,13 @@ class StoreTests(unittest.TestCase):
         self.assertIsNone(paragraph.page)
         self.assertIn('paragraph:1',paragraph.locator)
 
+    def test_shared_document_title_cannot_make_wrong_pdf_page_answerable(self):
+        pdf=self.root/'licensed.pdf';pdf_fixture(pdf)
+        self.store.ingest(pdf,replace(self.meta,doc_id='refund',title='Refund window',topic='refund.window'),rights_attested=True)
+        result=self.store.query(self.viewer,'refund window')
+        self.assertEqual(result['citations'][0]['page'],2)
+        self.assertIn('fourteen days',result['answer'])
+
     def test_failed_parse_does_not_destroy_current_revision(self):
         self.ingest()
         bad = self.root/'invalid.docx';bad.write_bytes(b'not a docx')
