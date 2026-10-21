@@ -95,17 +95,30 @@ def retrieve_mode(query:str,chunks:list[Chunk],scope:str='public',k:int=3,mode:s
 
 def rerank(results:list[dict])->list[dict]:return sorted(results,key=lambda x:(-x['score'],x['chunk'].id))
 
+def answerable_by_chunk(question:str,chunk:Chunk,min_coverage:float=0.6)->bool:
+    # Retrieval relevance alone is not evidence that the chunk answers the question.
+    terms=set(words(question))-{ 'what','is','the','a','an','for','to','how','does','in','of','our','are','policy' }
+    if not terms:return True
+    evidence=set(words(f'{chunk.title} {chunk.text}'))
+    return len(terms&evidence)/len(terms)>=min_coverage
+
 def answer(question:str,chunks:list[Chunk],scope:str='public',mode:str='lexical',k:int=3,adapter:EmbeddingProvider|None=None)->dict:
     hits=retrieve_mode(question,chunks,scope,k,mode,adapter)
     if not hits:return {'answer':'I do not have enough evidence in the available documents.','citations':[],'status':'NO_ANSWER','provider':f'offline_{mode}'}
     best=hits[0]['chunk']
+    # Exact-token coverage is a lexical heuristic, not a semantic entailment test.
+    # Applying it to embedding paraphrases would reject supported synonyms.
+    if mode=='lexical' and not answerable_by_chunk(question,best):
+        return {'answer':'I do not have enough evidence in the available documents.','citations':[],'status':'NO_ANSWER','provider':f'offline_{mode}'}
     sentence=re.split(r'(?<=[.!?])\s+',best.text)[0]
     return {'answer':sentence,'citations':[{'doc_id':best.doc_id,'chunk_id':best.id,'title':best.title,'version':best.version}],'status':'EXTRACTIVE','provider':f'offline_{mode}'}
 
 def explain(question:str,chunks:list[Chunk],scope:str='public',mode:str='lexical',k:int=3,adapter:EmbeddingProvider|None=None)->dict:
     hits=retrieve_mode(question,chunks,scope,k,mode,adapter)
     result=answer(question,chunks,scope,mode,k,adapter)
-    return {**result,'mode':mode,'scope':scope,'top_k':k,'no_answer_reason':'NO_ACCESSIBLE_MATCH_ABOVE_THRESHOLD' if not hits else None,
+    reason=('NO_ACCESSIBLE_MATCH_ABOVE_THRESHOLD' if not hits else
+            'QUESTION_NOT_ANSWERABLE_BY_TOP_HIT' if result['status']=='NO_ANSWER' else None)
+    return {**result,'mode':mode,'scope':scope,'top_k':k,'no_answer_reason':reason,
             'retrieved_chunks':[{'chunk_id':x['chunk'].id,'doc_id':x['chunk'].doc_id,'title':x['chunk'].title,'text':x['chunk'].text,'score':x['score'],'access':x['chunk'].access,'version':x['chunk'].version} for x in hits]}
 
 def load()->list[Chunk]:return [c for doc in json.loads(Path('data/documents.json').read_text()) for c in chunk_document(doc)]
