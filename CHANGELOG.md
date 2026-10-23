@@ -1,6 +1,11 @@
 # Changelog
 
-## Unreleased source snapshot — 2026-10-23
+## Unreleased source snapshot — 2026-10-24
+
+- Independent post-merge review found remaining missing-value excerpts: an archived support phone directory or a statement that the number changes could still pass token coverage. Require complete question content terms and syntactic phone/email/number values within the returned sentence. Keep the existing coverage floor and original fixture expectations.
+- Expand the shared excerpt suite to 17 cases, preserving the intermediate `372a137a` baseline (11/17) and improving to 17/17. Further independent review added hours-reference cases: the final set is 21/21, improving from 18/21 on candidate `a223b98`. Hours queries now require an explicit clock range; phone scanning masks date/time spans without discarding real phone values in the same sentence. Unicode letter adjacency and fullwidth-digit regressions expand the final set to 26/26 in both languages; typed numeric syntax is consistently ASCII and letter/number boundaries are Unicode-aware. Python remains 49 tests; Node now has 36. The separate local eval remains 60/60 required and 60/62 overall, with the same two semantic failures.
+
+## 2026-10-23 first sentence-selection repair (intermediate)
 
 - Fix Python and browser lexical extraction to rank/validate the returned sentence, instead of letting title/whole-chunk evidence justify an unrelated first sentence. Preserve the 0.6 threshold and existing refusal/ACL checks; recognize explicit clock ranges as a sentence-local hours cue.
 - Add ten shared synthetic excerpt cases with a preserved failing baseline; 2/10 improves to 10/10. Existing lexical fixtures and the local 60-required/2-semantic-probe contract remain unchanged.

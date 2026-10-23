@@ -1,0 +1,662 @@
+{
+  "provenance": "synthetic_unverified",
+  "cases": 21,
+  "passed": 18,
+  "access_failures": 0,
+  "answer_model_eval": "NOT_RUN",
+  "semantic_correctness": "NOT_TESTED",
+  "rows": [
+    {
+      "id": "first_sentence",
+      "pass": true,
+      "access_pass": true,
+      "failure_type": null,
+      "result": {
+        "answer": "The support phone number is 555-0100.",
+        "citations": [
+          {
+            "doc_id": "contact",
+            "chunk_id": "contact:0",
+            "title": "Support contact",
+            "version": 1
+          }
+        ],
+        "status": "EXTRACTIVE",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": null,
+        "retrieved_chunks": [
+          {
+            "chunk_id": "contact:0",
+            "doc_id": "contact",
+            "title": "Support contact",
+            "text": "The support phone number is 555-0100. Our office has a garden.",
+            "score": 5,
+            "access": "public",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "second_sentence",
+      "pass": true,
+      "access_pass": true,
+      "failure_type": null,
+      "result": {
+        "answer": "The support phone number is 555-0100.",
+        "citations": [
+          {
+            "doc_id": "contact",
+            "chunk_id": "contact:0",
+            "title": "Support contact",
+            "version": 1
+          }
+        ],
+        "status": "EXTRACTIVE",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": null,
+        "retrieved_chunks": [
+          {
+            "chunk_id": "contact:0",
+            "doc_id": "contact",
+            "title": "Support contact",
+            "text": "Our office has a garden. The support phone number is 555-0100.",
+            "score": 5,
+            "access": "public",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "later_sentence",
+      "pass": true,
+      "access_pass": true,
+      "failure_type": null,
+      "result": {
+        "answer": "The support phone number is 555-0100.",
+        "citations": [
+          {
+            "doc_id": "contact",
+            "chunk_id": "contact:0",
+            "title": "Support contact",
+            "version": 1
+          }
+        ],
+        "status": "EXTRACTIVE",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": null,
+        "retrieved_chunks": [
+          {
+            "chunk_id": "contact:0",
+            "doc_id": "contact",
+            "title": "Support contact",
+            "text": "Our office has a garden. Visitors use the east entrance. The support phone number is 555-0100.",
+            "score": 5,
+            "access": "public",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefer_more_complete_sentence",
+      "pass": true,
+      "access_pass": true,
+      "failure_type": null,
+      "result": {
+        "answer": "The support phone number is 555-0100.",
+        "citations": [
+          {
+            "doc_id": "contact",
+            "chunk_id": "contact:0",
+            "title": "Support contact",
+            "version": 1
+          }
+        ],
+        "status": "EXTRACTIVE",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": null,
+        "retrieved_chunks": [
+          {
+            "chunk_id": "contact:0",
+            "doc_id": "contact",
+            "title": "Support contact",
+            "text": "Our support phone directory is archived. The support phone number is 555-0100.",
+            "score": 5,
+            "access": "public",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "title_is_not_answer_evidence",
+      "pass": true,
+      "access_pass": true,
+      "failure_type": null,
+      "result": {
+        "answer": "I do not have enough evidence in the available documents.",
+        "citations": [],
+        "status": "NO_ANSWER",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": "QUESTION_NOT_ANSWERABLE_BY_TOP_HIT",
+        "retrieved_chunks": [
+          {
+            "chunk_id": "contact:0",
+            "doc_id": "contact",
+            "title": "Support phone number",
+            "text": "Our office has a garden. Support staff tend the garden.",
+            "score": 7,
+            "access": "public",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "no_supporting_sentence",
+      "pass": true,
+      "access_pass": true,
+      "failure_type": null,
+      "result": {
+        "answer": "I do not have enough evidence in the available documents.",
+        "citations": [],
+        "status": "NO_ANSWER",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": "QUESTION_NOT_ANSWERABLE_BY_TOP_HIT",
+        "retrieved_chunks": [
+          {
+            "chunk_id": "terms:0",
+            "doc_id": "terms",
+            "title": "Inventory",
+            "text": "Alpha beta describe inventory. Gamma delta describe the office.",
+            "score": 4,
+            "access": "public",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "team_allowed_later_sentence",
+      "pass": true,
+      "access_pass": true,
+      "failure_type": null,
+      "result": {
+        "answer": "The support phone number is 555-0100.",
+        "citations": [
+          {
+            "doc_id": "contact",
+            "chunk_id": "contact:0",
+            "title": "Support contact",
+            "version": 2
+          }
+        ],
+        "status": "EXTRACTIVE",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "team",
+        "top_k": 3,
+        "no_answer_reason": null,
+        "retrieved_chunks": [
+          {
+            "chunk_id": "contact:0",
+            "doc_id": "contact",
+            "title": "Support contact",
+            "text": "Our office has a garden. The support phone number is 555-0100.",
+            "score": 5,
+            "access": "team",
+            "version": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "team_denied_later_sentence",
+      "pass": true,
+      "access_pass": true,
+      "failure_type": null,
+      "result": {
+        "answer": "I do not have enough evidence in the available documents.",
+        "citations": [],
+        "status": "NO_ANSWER",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": "NO_ACCESSIBLE_MATCH_ABOVE_THRESHOLD",
+        "retrieved_chunks": []
+      }
+    },
+    {
+      "id": "clock_range_supports_hours",
+      "pass": true,
+      "access_pass": true,
+      "failure_type": null,
+      "result": {
+        "answer": "The support desk is available from 09:00 to 17:00.",
+        "citations": [
+          {
+            "doc_id": "support",
+            "chunk_id": "support:0",
+            "title": "Information",
+            "version": 1
+          }
+        ],
+        "status": "EXTRACTIVE",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": null,
+        "retrieved_chunks": [
+          {
+            "chunk_id": "support:0",
+            "doc_id": "support",
+            "title": "Information",
+            "text": "Our office has a garden. The support desk is available from 09:00 to 17:00.",
+            "score": 1,
+            "access": "public",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "unrelated_clock_does_not_lend_evidence",
+      "pass": true,
+      "access_pass": true,
+      "failure_type": null,
+      "result": {
+        "answer": "I do not have enough evidence in the available documents.",
+        "citations": [],
+        "status": "NO_ANSWER",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": "QUESTION_NOT_ANSWERABLE_BY_TOP_HIT",
+        "retrieved_chunks": [
+          {
+            "chunk_id": "support:0",
+            "doc_id": "support",
+            "title": "Support hours",
+            "text": "Our support team works remotely. The trains run from 09:00 to 17:00.",
+            "score": 5,
+            "access": "public",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "incomplete_phone_excerpt",
+      "pass": true,
+      "access_pass": true,
+      "failure_type": null,
+      "result": {
+        "answer": "I do not have enough evidence in the available documents.",
+        "citations": [],
+        "status": "NO_ANSWER",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": "QUESTION_NOT_ANSWERABLE_BY_TOP_HIT",
+        "retrieved_chunks": [
+          {
+            "chunk_id": "contact:0",
+            "doc_id": "contact",
+            "title": "Support contact",
+            "text": "Our support phone directory is archived.",
+            "score": 4,
+            "access": "public",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "phone_reference_before_value",
+      "pass": true,
+      "access_pass": true,
+      "failure_type": null,
+      "result": {
+        "answer": "The support phone number is 555-0100.",
+        "citations": [
+          {
+            "doc_id": "contact",
+            "chunk_id": "contact:0",
+            "title": "Support contact",
+            "version": 1
+          }
+        ],
+        "status": "EXTRACTIVE",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": null,
+        "retrieved_chunks": [
+          {
+            "chunk_id": "contact:0",
+            "doc_id": "contact",
+            "title": "Support contact",
+            "text": "The support phone number changes quarterly. The support phone number is 555-0100.",
+            "score": 5,
+            "access": "public",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "phone_reference_without_value",
+      "pass": true,
+      "access_pass": true,
+      "failure_type": null,
+      "result": {
+        "answer": "I do not have enough evidence in the available documents.",
+        "citations": [],
+        "status": "NO_ANSWER",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": "QUESTION_NOT_ANSWERABLE_BY_TOP_HIT",
+        "retrieved_chunks": [
+          {
+            "chunk_id": "contact:0",
+            "doc_id": "contact",
+            "title": "Support contact",
+            "text": "The support phone number changes quarterly.",
+            "score": 5,
+            "access": "public",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "email_reference_without_value",
+      "pass": true,
+      "access_pass": true,
+      "failure_type": null,
+      "result": {
+        "answer": "I do not have enough evidence in the available documents.",
+        "citations": [],
+        "status": "NO_ANSWER",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": "QUESTION_NOT_ANSWERABLE_BY_TOP_HIT",
+        "retrieved_chunks": [
+          {
+            "chunk_id": "contact:0",
+            "doc_id": "contact",
+            "title": "Escalation email address",
+            "text": "The escalation email address changes quarterly.",
+            "score": 9,
+            "access": "public",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "email_reference_before_value",
+      "pass": true,
+      "access_pass": true,
+      "failure_type": null,
+      "result": {
+        "answer": "The escalation email address is help@example.invalid.",
+        "citations": [
+          {
+            "doc_id": "contact",
+            "chunk_id": "contact:0",
+            "title": "Escalation email address",
+            "version": 1
+          }
+        ],
+        "status": "EXTRACTIVE",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": null,
+        "retrieved_chunks": [
+          {
+            "chunk_id": "contact:0",
+            "doc_id": "contact",
+            "title": "Escalation email address",
+            "text": "The escalation email address changes quarterly. The escalation email address is help@example.invalid.",
+            "score": 9,
+            "access": "public",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "different_phone_value",
+      "pass": true,
+      "access_pass": true,
+      "failure_type": null,
+      "result": {
+        "answer": "The support phone number is +44 (0)20 7946 0958.",
+        "citations": [
+          {
+            "doc_id": "contact",
+            "chunk_id": "contact:0",
+            "title": "Support contact",
+            "version": 1
+          }
+        ],
+        "status": "EXTRACTIVE",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": null,
+        "retrieved_chunks": [
+          {
+            "chunk_id": "contact:0",
+            "doc_id": "contact",
+            "title": "Support contact",
+            "text": "The support phone number is +44 (0)20 7946 0958.",
+            "score": 5,
+            "access": "public",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "phone_reference_with_date",
+      "pass": true,
+      "access_pass": true,
+      "failure_type": null,
+      "result": {
+        "answer": "I do not have enough evidence in the available documents.",
+        "citations": [],
+        "status": "NO_ANSWER",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": "QUESTION_NOT_ANSWERABLE_BY_TOP_HIT",
+        "retrieved_chunks": [
+          {
+            "chunk_id": "contact:0",
+            "doc_id": "contact",
+            "title": "Support contact",
+            "text": "The support phone number changes on 2026-10-24.",
+            "score": 5,
+            "access": "public",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "hours_reference_without_value",
+      "pass": false,
+      "access_pass": true,
+      "failure_type": "Workflow",
+      "result": {
+        "answer": "Our support hours change quarterly.",
+        "citations": [
+          {
+            "doc_id": "support",
+            "chunk_id": "support:0",
+            "title": "Support hours",
+            "version": 1
+          }
+        ],
+        "status": "EXTRACTIVE",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": null,
+        "retrieved_chunks": [
+          {
+            "chunk_id": "support:0",
+            "doc_id": "support",
+            "title": "Support hours",
+            "text": "Our support hours change quarterly.",
+            "score": 6,
+            "access": "public",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "hours_reference_before_value",
+      "pass": false,
+      "access_pass": true,
+      "failure_type": "Workflow",
+      "result": {
+        "answer": "Our support hours change quarterly.",
+        "citations": [
+          {
+            "doc_id": "support",
+            "chunk_id": "support:0",
+            "title": "Support hours",
+            "version": 1
+          }
+        ],
+        "status": "EXTRACTIVE",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": null,
+        "retrieved_chunks": [
+          {
+            "chunk_id": "support:0",
+            "doc_id": "support",
+            "title": "Support hours",
+            "text": "Our support hours change quarterly. The support desk is available from 09:00 to 17:00.",
+            "score": 6,
+            "access": "public",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "phone_reference_with_timestamp",
+      "pass": false,
+      "access_pass": true,
+      "failure_type": "Workflow",
+      "result": {
+        "answer": "The support phone number was updated on 2026-10-24 10:30.",
+        "citations": [
+          {
+            "doc_id": "contact",
+            "chunk_id": "contact:0",
+            "title": "Support contact",
+            "version": 1
+          }
+        ],
+        "status": "EXTRACTIVE",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": null,
+        "retrieved_chunks": [
+          {
+            "chunk_id": "contact:0",
+            "doc_id": "contact",
+            "title": "Support contact",
+            "text": "The support phone number was updated on 2026-10-24 10:30.",
+            "score": 5,
+            "access": "public",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "phone_value_with_timestamp",
+      "pass": true,
+      "access_pass": true,
+      "failure_type": null,
+      "result": {
+        "answer": "The support phone number, updated on 2026-10-24 10:30, is 555-0100.",
+        "citations": [
+          {
+            "doc_id": "contact",
+            "chunk_id": "contact:0",
+            "title": "Support contact",
+            "version": 1
+          }
+        ],
+        "status": "EXTRACTIVE",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": null,
+        "retrieved_chunks": [
+          {
+            "chunk_id": "contact:0",
+            "doc_id": "contact",
+            "title": "Support contact",
+            "text": "The support phone number, updated on 2026-10-24 10:30, is 555-0100.",
+            "score": 5,
+            "access": "public",
+            "version": 1
+          }
+        ]
+      }
+    }
+  ],
+  "source_sha": "a223b98de92918c14cdb784a7a692dec990451cf",
+  "dataset_sha256": "c46465335593ce085f949b2afb8df51f6e35f06bdc7d94c527a1d11110f63a2d",
+  "command": "python evals/excerpts.py (expanded cases against git show a223b98:rag.py in isolated baseline directory)",
+  "expected_exit_code": 1
+}
