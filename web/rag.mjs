@@ -14,15 +14,26 @@ export function search(query,docs,scope='public',k=3){
   return hits.sort((a,b)=>b.score-a.score||a.doc.id.localeCompare(b.doc.id)).slice(0,k);
 }
 
+function hasRequestedValue(terms,sentence){
+  if(terms.has('phone')){
+    const candidates=sentence.match(/(?<!\w)\+?\d[\d ()+.\-]*\d(?!\w)/g)||[];
+    if(!candidates.some(value=>{const n=(value.match(/\d/g)||[]).length;return n>=7&&n<=15&&!/^\d{4}-\d{2}-\d{2}$/.test(value);}))return false;
+  }
+  if(terms.has('email')&&!/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/.test(sentence))return false;
+  if(terms.has('number')&&!/\d/.test(sentence))return false;
+  return true;
+}
+
 export function lexicalExcerpt(query,text,minCoverage=0.6){
   const terms=termsFor(query);if(!terms.size)return null;
+  const required=new Set(terms);if(/\bhow\s+many\b/.test(query.toLowerCase()))required.delete('many');
   let best=null,bestCoverage=0;
   for(const sentence of text.split(/(?<=[.!?])\s+/)){
     const evidence=new Set(words(sentence));
     // Match Python's sentence-local clock-range cue; titles are retrieval-only.
     if(/\b\d{1,2}:\d{2}\s*(?:to|[-–])\s*\d{1,2}:\d{2}\b/.test(sentence))evidence.add('hours');
     const coverage=[...terms].filter(t=>evidence.has(t)).length/terms.size;
-    if(coverage>=minCoverage&&coverage>bestCoverage){best=sentence;bestCoverage=coverage;}
+    if(coverage>=minCoverage&&[...required].every(t=>evidence.has(t))&&hasRequestedValue(required,sentence)&&coverage>bestCoverage){best=sentence;bestCoverage=coverage;}
   }
   return best;
 }

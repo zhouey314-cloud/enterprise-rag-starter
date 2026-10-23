@@ -95,11 +95,25 @@ def retrieve_mode(query:str,chunks:list[Chunk],scope:str='public',k:int=3,mode:s
 
 def rerank(results:list[dict])->list[dict]:return sorted(results,key=lambda x:(-x['score'],x['chunk'].id))
 
+def has_requested_value(terms:set[str],sentence:str)->bool:
+    # Conservative typed lexical checks; these do not prove semantic entailment.
+    if 'phone' in terms:
+        candidates=re.findall(r'(?<!\w)\+?\d[\d ()+.\-]*\d(?!\w)',sentence)
+        if not any(7<=len(re.findall(r'\d',value))<=15 and
+                   not re.fullmatch(r'\d{4}-\d{2}-\d{2}',value) for value in candidates):
+            return False
+    if 'email' in terms and not re.search(r'[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}',sentence):
+        return False
+    if 'number' in terms and not re.search(r'\d',sentence):
+        return False
+    return True
+
 def lexical_excerpt(question:str,chunk:Chunk,min_coverage:float=0.6)->str|None:
     # Score the exact sentence we will return. Titles remain retrieval-only;
     # unrelated sentences cannot lend their terms to the chosen answer.
     terms=set(words(question))-{ 'what','is','the','a','an','for','to','how','does','in','of','our','are','policy' }
     if not terms:return None
+    required=terms-{'many'} if re.search(r'\bhow\s+many\b',question.lower()) else terms
     best=None;best_coverage=0.0
     for sentence in re.split(r'(?<=[.!?])\s+',chunk.text):
         evidence=set(words(sentence))
@@ -108,7 +122,8 @@ def lexical_excerpt(question:str,chunk:Chunk,min_coverage:float=0.6)->str|None:
         if re.search(r'\b\d{1,2}:\d{2}\s*(?:to|[-–])\s*\d{1,2}:\d{2}\b',sentence):
             evidence.add('hours')
         coverage=len(terms&evidence)/len(terms)
-        if coverage>=min_coverage and coverage>best_coverage:
+        if (coverage>=min_coverage and required<=evidence and
+                has_requested_value(required,sentence) and coverage>best_coverage):
             best=sentence;best_coverage=coverage
     return best
 
