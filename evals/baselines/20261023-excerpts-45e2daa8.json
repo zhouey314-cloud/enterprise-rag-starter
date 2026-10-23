@@ -1,0 +1,330 @@
+{
+  "provenance": "synthetic_unverified",
+  "cases": 10,
+  "passed": 2,
+  "access_failures": 0,
+  "answer_model_eval": "NOT_RUN",
+  "semantic_correctness": "NOT_TESTED",
+  "rows": [
+    {
+      "id": "first_sentence",
+      "pass": true,
+      "access_pass": true,
+      "failure_type": null,
+      "result": {
+        "answer": "The support phone number is 555-0100.",
+        "citations": [
+          {
+            "doc_id": "contact",
+            "chunk_id": "contact:0",
+            "title": "Support contact",
+            "version": 1
+          }
+        ],
+        "status": "EXTRACTIVE",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": null,
+        "retrieved_chunks": [
+          {
+            "chunk_id": "contact:0",
+            "doc_id": "contact",
+            "title": "Support contact",
+            "text": "The support phone number is 555-0100. Our office has a garden.",
+            "score": 5,
+            "access": "public",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "second_sentence",
+      "pass": false,
+      "access_pass": true,
+      "failure_type": "Workflow",
+      "result": {
+        "answer": "Our office has a garden.",
+        "citations": [
+          {
+            "doc_id": "contact",
+            "chunk_id": "contact:0",
+            "title": "Support contact",
+            "version": 1
+          }
+        ],
+        "status": "EXTRACTIVE",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": null,
+        "retrieved_chunks": [
+          {
+            "chunk_id": "contact:0",
+            "doc_id": "contact",
+            "title": "Support contact",
+            "text": "Our office has a garden. The support phone number is 555-0100.",
+            "score": 5,
+            "access": "public",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "later_sentence",
+      "pass": false,
+      "access_pass": true,
+      "failure_type": "Workflow",
+      "result": {
+        "answer": "Our office has a garden.",
+        "citations": [
+          {
+            "doc_id": "contact",
+            "chunk_id": "contact:0",
+            "title": "Support contact",
+            "version": 1
+          }
+        ],
+        "status": "EXTRACTIVE",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": null,
+        "retrieved_chunks": [
+          {
+            "chunk_id": "contact:0",
+            "doc_id": "contact",
+            "title": "Support contact",
+            "text": "Our office has a garden. Visitors use the east entrance. The support phone number is 555-0100.",
+            "score": 5,
+            "access": "public",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefer_more_complete_sentence",
+      "pass": false,
+      "access_pass": true,
+      "failure_type": "Workflow",
+      "result": {
+        "answer": "Our support phone directory is archived.",
+        "citations": [
+          {
+            "doc_id": "contact",
+            "chunk_id": "contact:0",
+            "title": "Support contact",
+            "version": 1
+          }
+        ],
+        "status": "EXTRACTIVE",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": null,
+        "retrieved_chunks": [
+          {
+            "chunk_id": "contact:0",
+            "doc_id": "contact",
+            "title": "Support contact",
+            "text": "Our support phone directory is archived. The support phone number is 555-0100.",
+            "score": 5,
+            "access": "public",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "title_is_not_answer_evidence",
+      "pass": false,
+      "access_pass": true,
+      "failure_type": "Workflow",
+      "result": {
+        "answer": "Our office has a garden.",
+        "citations": [
+          {
+            "doc_id": "contact",
+            "chunk_id": "contact:0",
+            "title": "Support phone number",
+            "version": 1
+          }
+        ],
+        "status": "EXTRACTIVE",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": null,
+        "retrieved_chunks": [
+          {
+            "chunk_id": "contact:0",
+            "doc_id": "contact",
+            "title": "Support phone number",
+            "text": "Our office has a garden. Support staff tend the garden.",
+            "score": 7,
+            "access": "public",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "no_supporting_sentence",
+      "pass": false,
+      "access_pass": true,
+      "failure_type": "Workflow",
+      "result": {
+        "answer": "Alpha beta describe inventory.",
+        "citations": [
+          {
+            "doc_id": "terms",
+            "chunk_id": "terms:0",
+            "title": "Inventory",
+            "version": 1
+          }
+        ],
+        "status": "EXTRACTIVE",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": null,
+        "retrieved_chunks": [
+          {
+            "chunk_id": "terms:0",
+            "doc_id": "terms",
+            "title": "Inventory",
+            "text": "Alpha beta describe inventory. Gamma delta describe the office.",
+            "score": 4,
+            "access": "public",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "team_allowed_later_sentence",
+      "pass": false,
+      "access_pass": true,
+      "failure_type": "Workflow",
+      "result": {
+        "answer": "Our office has a garden.",
+        "citations": [
+          {
+            "doc_id": "contact",
+            "chunk_id": "contact:0",
+            "title": "Support contact",
+            "version": 2
+          }
+        ],
+        "status": "EXTRACTIVE",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "team",
+        "top_k": 3,
+        "no_answer_reason": null,
+        "retrieved_chunks": [
+          {
+            "chunk_id": "contact:0",
+            "doc_id": "contact",
+            "title": "Support contact",
+            "text": "Our office has a garden. The support phone number is 555-0100.",
+            "score": 5,
+            "access": "team",
+            "version": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "team_denied_later_sentence",
+      "pass": true,
+      "access_pass": true,
+      "failure_type": null,
+      "result": {
+        "answer": "I do not have enough evidence in the available documents.",
+        "citations": [],
+        "status": "NO_ANSWER",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": "NO_ACCESSIBLE_MATCH_ABOVE_THRESHOLD",
+        "retrieved_chunks": []
+      }
+    },
+    {
+      "id": "clock_range_supports_hours",
+      "pass": false,
+      "access_pass": true,
+      "failure_type": "Workflow",
+      "result": {
+        "answer": "I do not have enough evidence in the available documents.",
+        "citations": [],
+        "status": "NO_ANSWER",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": "QUESTION_NOT_ANSWERABLE_BY_TOP_HIT",
+        "retrieved_chunks": [
+          {
+            "chunk_id": "support:0",
+            "doc_id": "support",
+            "title": "Information",
+            "text": "Our office has a garden. The support desk is available from 09:00 to 17:00.",
+            "score": 1,
+            "access": "public",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "unrelated_clock_does_not_lend_evidence",
+      "pass": false,
+      "access_pass": true,
+      "failure_type": "Workflow",
+      "result": {
+        "answer": "Our support team works remotely.",
+        "citations": [
+          {
+            "doc_id": "support",
+            "chunk_id": "support:0",
+            "title": "Support hours",
+            "version": 1
+          }
+        ],
+        "status": "EXTRACTIVE",
+        "provider": "offline_lexical",
+        "mode": "lexical",
+        "scope": "public",
+        "top_k": 3,
+        "no_answer_reason": null,
+        "retrieved_chunks": [
+          {
+            "chunk_id": "support:0",
+            "doc_id": "support",
+            "title": "Support hours",
+            "text": "Our support team works remotely. The trains run from 09:00 to 17:00.",
+            "score": 5,
+            "access": "public",
+            "version": 1
+          }
+        ]
+      }
+    }
+  ],
+  "source_sha": "45e2daa8fa7cbd4092c08219a68b16ca02148d50",
+  "dataset_sha256": "943f9ed10ddb3de5b4ebb5d6371094dc2ccaa1d041aaeaab44021f7dccfe5c03",
+  "command": "python evals/excerpts.py (added cases, unchanged baseline source)",
+  "expected_exit_code": 1
+}

@@ -42,4 +42,9 @@ class TestRAG(unittest.TestCase):
         for mode in ('semantic','hybrid'):
             with self.subTest(mode=mode),patch('rag.retrieve_mode',return_value=[{'chunk':support,'score':0.9}]):
                 self.assertEqual(answer('When can I reach customer service?',[support],mode=mode)['status'],'EXTRACTIVE')
+    def test_shared_excerpt_regressions(self):
+        from evals.excerpts import evaluate
+        for row in evaluate()['rows']:
+            with self.subTest(case=row['id']):
+                self.assertTrue(row['pass'], row['result'])
 if __name__=='__main__':unittest.main()

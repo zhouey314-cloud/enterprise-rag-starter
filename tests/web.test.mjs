@@ -17,3 +17,16 @@ test('phone information is allowed when it is present in the source',()=>{
   const result=explain('What is the support phone number?',[{id:'contact',title:'Support contact',text:'The support phone number is 555-0100.',access:'public',version:1}]);
   assert.equal(result.status,'EXTRACTIVE');assert.ok(result.answer.includes('555-0100'));
 });
+
+const excerptCases=(await readFile(new URL('../evals/excerpts.jsonl',import.meta.url),'utf8')).trim().split('\n').map(JSON.parse);
+for(const c of excerptCases)test(`excerpt browser: ${c.id}`,()=>{
+  const result=explain(c.question,[c.document],c.scope||'public');
+  assert.equal(result.status,c.expected_status);
+  assert.ok(result.hits.every(h=>h.doc.access==='public'||h.doc.access===c.scope));
+  if(c.expected_status==='NO_ANSWER')assert.deepEqual(result.citations,[]);
+  else{
+    assert.equal(result.answer,c.expected_answer);
+    assert.ok(c.document.text.includes(result.answer));
+    assert.deepEqual(result.citations,[{doc_id:c.document.id,chunk_id:`${c.document.id}:0`,title:c.document.title,version:c.document.version}]);
+  }
+});

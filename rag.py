@@ -95,12 +95,25 @@ def retrieve_mode(query:str,chunks:list[Chunk],scope:str='public',k:int=3,mode:s
 
 def rerank(results:list[dict])->list[dict]:return sorted(results,key=lambda x:(-x['score'],x['chunk'].id))
 
-def answerable_by_chunk(question:str,chunk:Chunk,min_coverage:float=0.6)->bool:
-    # Retrieval relevance alone is not evidence that the chunk answers the question.
+def lexical_excerpt(question:str,chunk:Chunk,min_coverage:float=0.6)->str|None:
+    # Score the exact sentence we will return. Titles remain retrieval-only;
+    # unrelated sentences cannot lend their terms to the chosen answer.
     terms=set(words(question))-{ 'what','is','the','a','an','for','to','how','does','in','of','our','are','policy' }
-    if not terms:return True
-    evidence=set(words(f'{chunk.title} {chunk.text}'))
-    return len(terms&evidence)/len(terms)>=min_coverage
+    if not terms:return None
+    best=None;best_coverage=0.0
+    for sentence in re.split(r'(?<=[.!?])\s+',chunk.text):
+        evidence=set(words(sentence))
+        # An explicit clock range expresses hours even without the word "hours".
+        # Keep this local to one sentence; it is a lexical cue, not entailment.
+        if re.search(r'\b\d{1,2}:\d{2}\s*(?:to|[-–])\s*\d{1,2}:\d{2}\b',sentence):
+            evidence.add('hours')
+        coverage=len(terms&evidence)/len(terms)
+        if coverage>=min_coverage and coverage>best_coverage:
+            best=sentence;best_coverage=coverage
+    return best
+
+def answerable_by_chunk(question:str,chunk:Chunk,min_coverage:float=0.6)->bool:
+    return lexical_excerpt(question,chunk,min_coverage) is not None
 
 def answer(question:str,chunks:list[Chunk],scope:str='public',mode:str='lexical',k:int=3,adapter:EmbeddingProvider|None=None)->dict:
     hits=retrieve_mode(question,chunks,scope,k,mode,adapter)
@@ -108,9 +121,9 @@ def answer(question:str,chunks:list[Chunk],scope:str='public',mode:str='lexical'
     best=hits[0]['chunk']
     # Exact-token coverage is a lexical heuristic, not a semantic entailment test.
     # Applying it to embedding paraphrases would reject supported synonyms.
-    if mode=='lexical' and not answerable_by_chunk(question,best):
+    sentence=lexical_excerpt(question,best) if mode=='lexical' else re.split(r'(?<=[.!?])\s+',best.text)[0]
+    if sentence is None:
         return {'answer':'I do not have enough evidence in the available documents.','citations':[],'status':'NO_ANSWER','provider':f'offline_{mode}'}
-    sentence=re.split(r'(?<=[.!?])\s+',best.text)[0]
     return {'answer':sentence,'citations':[{'doc_id':best.doc_id,'chunk_id':best.id,'title':best.title,'version':best.version}],'status':'EXTRACTIVE','provider':f'offline_{mode}'}
 
 def explain(question:str,chunks:list[Chunk],scope:str='public',mode:str='lexical',k:int=3,adapter:EmbeddingProvider|None=None)->dict:

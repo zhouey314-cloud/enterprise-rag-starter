@@ -14,12 +14,24 @@ export function search(query,docs,scope='public',k=3){
   return hits.sort((a,b)=>b.score-a.score||a.doc.id.localeCompare(b.doc.id)).slice(0,k);
 }
 
+export function lexicalExcerpt(query,text,minCoverage=0.6){
+  const terms=termsFor(query);if(!terms.size)return null;
+  let best=null,bestCoverage=0;
+  for(const sentence of text.split(/(?<=[.!?])\s+/)){
+    const evidence=new Set(words(sentence));
+    // Match Python's sentence-local clock-range cue; titles are retrieval-only.
+    if(/\b\d{1,2}:\d{2}\s*(?:to|[-–])\s*\d{1,2}:\d{2}\b/.test(sentence))evidence.add('hours');
+    const coverage=[...terms].filter(t=>evidence.has(t)).length/terms.size;
+    if(coverage>=minCoverage&&coverage>bestCoverage){best=sentence;bestCoverage=coverage;}
+  }
+  return best;
+}
+
 export function explain(query,docs,scope='public',k=3){
-  const hits=search(query,docs,scope,k),top=hits[0]?.doc,terms=termsFor(query);
-  const evidence=new Set(words(top?`${top.title} ${top.text}`:''));
-  const coverage=terms.size?[...terms].filter(t=>evidence.has(t)).length/terms.size:1;
-  const reason=!top?'NO_ACCESSIBLE_LEXICAL_MATCH':coverage<0.6?'QUESTION_NOT_ANSWERABLE_BY_TOP_HIT':null;
+  const hits=search(query,docs,scope,k),top=hits[0]?.doc;
+  const excerpt=top?lexicalExcerpt(query,top.text):null;
+  const reason=!top?'NO_ACCESSIBLE_LEXICAL_MATCH':excerpt===null?'QUESTION_NOT_ANSWERABLE_BY_TOP_HIT':null;
   return {hits,status:reason?'NO_ANSWER':'EXTRACTIVE',no_answer_reason:reason,
-    answer:reason?'I do not have enough evidence in the available documents.':top.text.split(/(?<=[.!?])\s+/)[0],
+    answer:reason?'I do not have enough evidence in the available documents.':excerpt,
     citations:reason?[]:[{doc_id:top.id,chunk_id:`${top.id}:0`,title:top.title,version:top.version}]};
 }
