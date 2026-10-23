@@ -95,21 +95,23 @@ def retrieve_mode(query:str,chunks:list[Chunk],scope:str='public',k:int=3,mode:s
 
 def rerank(results:list[dict])->list[dict]:return sorted(results,key=lambda x:(-x['score'],x['chunk'].id))
 
+CLOCK_RANGE=re.compile(r'(?<!\w)[0-9]{1,2}:[0-9]{2}\s*(?:to|[-–])\s*[0-9]{1,2}:[0-9]{2}(?!\w)')
+
 def has_requested_value(terms:set[str],sentence:str)->bool:
     # Conservative typed lexical checks; these do not prove semantic entailment.
     if 'phone' in terms:
         # Mask date/time spans before scanning, so adjacent timestamp digits
         # cannot be mistaken for a phone while a real value still qualifies.
-        value_text=re.sub(r'\b\d{4}-\d{2}-\d{2}\b|\b\d{1,2}:\d{2}(?::\d{2})?\b',' ',sentence)
-        candidates=re.findall(r'(?<!\w)\+?\d[\d ()+.\-]*\d(?!\w)',value_text)
-        if not any(7<=len(re.findall(r'\d',value))<=15 and
-                   not re.fullmatch(r'\d{4}-\d{2}-\d{2}',value) for value in candidates):
+        value_text=re.sub(r'(?<!\w)(?:[0-9]{4}-[0-9]{2}-[0-9]{2}|[0-9]{1,2}:[0-9]{2}(?::[0-9]{2})?)(?!\w)',' ',sentence)
+        candidates=re.findall(r'(?<!\w)\+?[0-9][0-9 ()+.\-]*[0-9](?!\w)',value_text)
+        if not any(7<=len(re.findall(r'[0-9]',value))<=15 and
+                   not re.fullmatch(r'[0-9]{4}-[0-9]{2}-[0-9]{2}',value) for value in candidates):
             return False
     if 'email' in terms and not re.search(r'[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}',sentence):
         return False
-    if 'hours' in terms and not re.search(r'\b\d{1,2}:\d{2}\s*(?:to|[-–])\s*\d{1,2}:\d{2}\b',sentence):
+    if 'hours' in terms and not CLOCK_RANGE.search(sentence):
         return False
-    if 'number' in terms and not re.search(r'\d',sentence):
+    if 'number' in terms and not re.search(r'[0-9]',sentence):
         return False
     return True
 
@@ -124,7 +126,7 @@ def lexical_excerpt(question:str,chunk:Chunk,min_coverage:float=0.6)->str|None:
         evidence=set(words(sentence))
         # An explicit clock range expresses hours even without the word "hours".
         # Keep this local to one sentence; it is a lexical cue, not entailment.
-        if re.search(r'\b\d{1,2}:\d{2}\s*(?:to|[-–])\s*\d{1,2}:\d{2}\b',sentence):
+        if CLOCK_RANGE.search(sentence):
             evidence.add('hours')
         coverage=len(terms&evidence)/len(terms)
         if (coverage>=min_coverage and required<=evidence and

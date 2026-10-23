@@ -14,15 +14,17 @@ export function search(query,docs,scope='public',k=3){
   return hits.sort((a,b)=>b.score-a.score||a.doc.id.localeCompare(b.doc.id)).slice(0,k);
 }
 
+// ASCII numeric syntax, with Unicode letter/number boundaries matching Python.
+const clockRange=/(?<![\p{L}\p{N}_])[0-9]{1,2}:[0-9]{2}\s*(?:to|[-–])\s*[0-9]{1,2}:[0-9]{2}(?![\p{L}\p{N}_])/u;
 function hasRequestedValue(terms,sentence){
   if(terms.has('phone')){
-    const valueText=sentence.replace(/\b\d{4}-\d{2}-\d{2}\b|\b\d{1,2}:\d{2}(?::\d{2})?\b/g,' ');
-    const candidates=valueText.match(/(?<!\w)\+?\d[\d ()+.\-]*\d(?!\w)/g)||[];
-    if(!candidates.some(value=>{const n=(value.match(/\d/g)||[]).length;return n>=7&&n<=15&&!/^\d{4}-\d{2}-\d{2}$/.test(value);}))return false;
+    const valueText=sentence.replace(/(?<![\p{L}\p{N}_])(?:[0-9]{4}-[0-9]{2}-[0-9]{2}|[0-9]{1,2}:[0-9]{2}(?::[0-9]{2})?)(?![\p{L}\p{N}_])/gu,' ');
+    const candidates=valueText.match(/(?<![\p{L}\p{N}_])\+?[0-9][0-9 ()+.\-]*[0-9](?![\p{L}\p{N}_])/gu)||[];
+    if(!candidates.some(value=>{const n=(value.match(/[0-9]/g)||[]).length;return n>=7&&n<=15&&!/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(value);}))return false;
   }
   if(terms.has('email')&&!/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/.test(sentence))return false;
-  if(terms.has('hours')&&!/\b\d{1,2}:\d{2}\s*(?:to|[-–])\s*\d{1,2}:\d{2}\b/.test(sentence))return false;
-  if(terms.has('number')&&!/\d/.test(sentence))return false;
+  if(terms.has('hours')&&!clockRange.test(sentence))return false;
+  if(terms.has('number')&&!/[0-9]/.test(sentence))return false;
   return true;
 }
 
@@ -33,7 +35,7 @@ export function lexicalExcerpt(query,text,minCoverage=0.6){
   for(const sentence of text.split(/(?<=[.!?])\s+/)){
     const evidence=new Set(words(sentence));
     // Match Python's sentence-local clock-range cue; titles are retrieval-only.
-    if(/\b\d{1,2}:\d{2}\s*(?:to|[-–])\s*\d{1,2}:\d{2}\b/.test(sentence))evidence.add('hours');
+    if(clockRange.test(sentence))evidence.add('hours');
     const coverage=[...terms].filter(t=>evidence.has(t)).length/terms.size;
     if(coverage>=minCoverage&&[...required].every(t=>evidence.has(t))&&hasRequestedValue(required,sentence)&&coverage>bestCoverage){best=sentence;bestCoverage=coverage;}
   }

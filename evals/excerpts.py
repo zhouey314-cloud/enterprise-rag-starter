@@ -11,7 +11,7 @@ DATASET = Path(__file__).with_name('excerpts.jsonl')
 
 def evaluate():
     cases = [json.loads(line) for line in DATASET.read_text().splitlines() if line.strip()]
-    if len(cases) < 21 or len({case['id'] for case in cases}) != len(cases):
+    if len(cases) < 26 or len({case['id'] for case in cases}) != len(cases):
         raise ValueError('Missing excerpt regressions or duplicate case IDs')
     if any(case['provenance'] != 'synthetic_unverified' for case in cases):
         raise ValueError('Excerpt provenance must not be silently promoted')
