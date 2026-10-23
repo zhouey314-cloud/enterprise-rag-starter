@@ -16,10 +16,12 @@ export function search(query,docs,scope='public',k=3){
 
 function hasRequestedValue(terms,sentence){
   if(terms.has('phone')){
-    const candidates=sentence.match(/(?<!\w)\+?\d[\d ()+.\-]*\d(?!\w)/g)||[];
+    const valueText=sentence.replace(/\b\d{4}-\d{2}-\d{2}\b|\b\d{1,2}:\d{2}(?::\d{2})?\b/g,' ');
+    const candidates=valueText.match(/(?<!\w)\+?\d[\d ()+.\-]*\d(?!\w)/g)||[];
     if(!candidates.some(value=>{const n=(value.match(/\d/g)||[]).length;return n>=7&&n<=15&&!/^\d{4}-\d{2}-\d{2}$/.test(value);}))return false;
   }
   if(terms.has('email')&&!/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/.test(sentence))return false;
+  if(terms.has('hours')&&!/\b\d{1,2}:\d{2}\s*(?:to|[-–])\s*\d{1,2}:\d{2}\b/.test(sentence))return false;
   if(terms.has('number')&&!/\d/.test(sentence))return false;
   return true;
 }

@@ -98,11 +98,16 @@ def rerank(results:list[dict])->list[dict]:return sorted(results,key=lambda x:(-
 def has_requested_value(terms:set[str],sentence:str)->bool:
     # Conservative typed lexical checks; these do not prove semantic entailment.
     if 'phone' in terms:
-        candidates=re.findall(r'(?<!\w)\+?\d[\d ()+.\-]*\d(?!\w)',sentence)
+        # Mask date/time spans before scanning, so adjacent timestamp digits
+        # cannot be mistaken for a phone while a real value still qualifies.
+        value_text=re.sub(r'\b\d{4}-\d{2}-\d{2}\b|\b\d{1,2}:\d{2}(?::\d{2})?\b',' ',sentence)
+        candidates=re.findall(r'(?<!\w)\+?\d[\d ()+.\-]*\d(?!\w)',value_text)
         if not any(7<=len(re.findall(r'\d',value))<=15 and
                    not re.fullmatch(r'\d{4}-\d{2}-\d{2}',value) for value in candidates):
             return False
     if 'email' in terms and not re.search(r'[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}',sentence):
+        return False
+    if 'hours' in terms and not re.search(r'\b\d{1,2}:\d{2}\s*(?:to|[-–])\s*\d{1,2}:\d{2}\b',sentence):
         return False
     if 'number' in terms and not re.search(r'\d',sentence):
         return False
