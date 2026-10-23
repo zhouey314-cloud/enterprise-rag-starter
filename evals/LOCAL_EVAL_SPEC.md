@@ -1,6 +1,6 @@
 # Local file/identity candidate eval contract
 
-The target is the separate `localrag` SQLite library and authenticated loopback service. The existing four lexical retrieval fixtures, nine answerability fixtures, 23 original Python tests and 10 Node tests remain unchanged. Optional old semantic/hybrid adapters are not called by this suite. No model, embedding, paid API or customer/company data is used.
+The target is the separate `localrag` SQLite library and authenticated loopback service. The four lexical retrieval and nine answerability fixtures remain unchanged. Historical baseline counts below describe their original runs; the current suite also includes the later shared excerpt regressions in `PROJECT_EVAL_SPEC.md`. Optional old semantic/hybrid adapters are not called by this suite. No model, embedding, paid API or customer/company data is used.
 
 ## Dataset and provenance
 

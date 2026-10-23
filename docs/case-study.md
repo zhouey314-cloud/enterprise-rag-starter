@@ -1,43 +1,29 @@
 # Enterprise RAG Starter — case study
 
-## Problem
-An enterprise knowledge assistant must retrieve the right accessible document, show where an answer came from, and refuse when evidence is missing.
+## Problem and context
 
-## Context
-The corpus is four fictional policy documents. The online demo is lexical; local Python offers actual embedding-based semantic and hybrid retrieval.
+A knowledge assistant must retrieve accessible evidence, return the relevant excerpt with a traceable source, and refuse when evidence is insufficient. This self-built reference uses fictional data and keeps three paths explicit: a public lexical browser demo, optional local embedding-based semantic/hybrid retrieval, and a local file/identity library.
 
-## Constraints
-The public static host cannot run a private embedding service or secure ACL. All online records are synthetic, and scope switching is illustrative.
+## Implementation and boundaries
 
-## My Role
-I built chunking, ACL-first retrieval, citation/no-answer behavior, local semantic adapter, hybrid ranking, browser explorer, tests and eval runner.
+The public demo filters illustrative caller-selected scope before retrieval. The optional local modes use a real SentenceTransformer adapter and weighted reciprocal-rank fusion, fail when dependencies/model are missing, and do not silently fall back. The separate local library ingests MD/PDF/DOCX transactionally, tracks source hashes and revisions, enforces effective/expiry/deletion/conflict rules, and resolves opaque tokens to server-stored tenant/role identities. Operator CLI and loopback HTTP queries/source lookup are covered by child-process tests. This is not production IAM, and local capabilities are not hosted by the static website.
 
-## Architecture
-Documents become metadata-bearing chunks. Access filtering precedes lexical overlap or normalized sentence-embedding cosine ranking. Hybrid uses weighted reciprocal-rank fusion. The highest-ranked accessible chunk supplies an exact sentence and citation.
+My work covers the public implementation, tests, eval runners and documentation. No company code, customer deployment, production accuracy or commercial outcome is claimed.
 
-## Key Decisions
-Keep lexical as a transparent baseline, make semantic an optional replaceable local adapter, and never silently fall back from semantic to lexical. Display scores, access scope and no-answer reason.
+## Failure and repair
 
-## Hardest Problem
-The first hybrid weighting let a generic lexical overlap outrank the correct semantic paraphrase. The synthetic failure was kept in eval; semantic weight was increased and the same cases rerun.
+The lexical path previously judged answerability from a title and entire chunk, then always returned the first sentence. With “Our office has a garden. The support phone number is 555-0100.” it returned the garden sentence. The repair ranks the actual sentences by body evidence, retains the provisional 0.6 coverage threshold and refuses if none qualifies. Titles remain retrieval-only. An explicit clock range supplies a sentence-local “hours” cue, preserving the existing support-hours case. Shared Python/JavaScript fixtures cover later sentences, misleading titles, refusal, ACL and exact citations.
 
-## Failure/Tradeoff
-Lexical matching can miss synonyms or match generic words. Embedding similarity can return merely related text. The 0.30 semantic threshold is provisional for this tiny corpus.
+This is a deterministic extraction fix. Token coverage is not entailment; semantic/hybrid extraction remains a separate known limitation. The earlier hybrid-weighting experiment and historical mode counts do not establish current model quality.
 
-## Testing
-19 Python unit tests; 4 legacy lexical fixtures; local mode eval: lexical 5/5, semantic 8/8 and hybrid 8/8 synthetic cases. Browser checked public employee-policy no-answer versus team-scope retrieval.
+## Verification
 
-## Eval
-Retrieval Recall@1, citation correctness, no-answer, ACL leakage and top-K are separate gates. All labels are `synthetic_unverified`; generative answer quality is `NOT_RUN`.
+At the 2026-10-23 repair: 49 Python tests and 20 Node tests pass; four original retrieval and nine answerability cases remain unchanged. The ten new shared excerpt cases improve from 2/10 on baseline `45e2daa8` to 10/10 with no regression in existing gates. The separate local eval still passes 60/60 required lexical contracts and 60/62 all-candidate contracts; the same two semantic-paraphrase probes fail. Citation/access integrity gates pass. See [failure evidence](../FAILURE_ANALYSIS.md), [excerpt runner](../evals/excerpts.py) and [local eval contract](../evals/LOCAL_EVAL_SPEC.md).
 
-## Current Evidence
-[Online lexical explorer](https://zhouey314-cloud.github.io/enterprise-rag-starter/) · [eval spec](../evals/PROJECT_EVAL_SPEC.md) · [runner](../evals/modes.py) · [source](../rag.py).
+All cases remain `synthetic_unverified`. The user reported reviewing all 62 local candidates, recorded by the [receipt](reviews/user-review-receipt-20261021.json); no itemized verdicts or independently verified enterprise ground truth were supplied. Optional model execution was not rerun in this repair. Generative answer quality is `NOT_RUN`, provider semantics `NOT_TESTED`, and production acceptance `BLOCKED`.
 
-## Limitations
-No real documents, authenticated scope, PDF ingestion, expert-verified labels or production vector index. The answer is extractive, not generated.
+## Evidence and next work
 
-## What I Would Do in Production
-Add verified ingestion/versioning, authenticated ACLs at every retrieval stage, a calibrated no-answer threshold, human-reviewed eval sets and trace monitoring.
+[Online lexical explorer](https://zhouey314-cloud.github.io/enterprise-rag-starter/) · [architecture](architecture.md) · [local quickstart](local-quickstart.md) · [source](../rag.py) · [eval spec](../evals/PROJECT_EVAL_SPEC.md).
 
-## What I Learned
-Retrieval success, citation presence and answer validity are different claims; hybrid ranking requires its own regression cases.
+Before real enterprise use, add authorized verified policies, independently reviewed deployment/IAM, human-governed expectations, calibrated semantic answerability and trace monitoring. A citation identifies evidence; it does not itself establish correctness, completeness or production safety.
