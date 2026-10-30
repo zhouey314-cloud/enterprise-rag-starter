@@ -92,6 +92,9 @@ def main(argv=None):
     parser.add_argument('--db',default='.rag-data/index.sqlite3')
     commands = parser.add_subparsers(dest='command',required=True)
     commands.add_parser('init')
+    commands.add_parser('doctor')
+    backup = commands.add_parser('backup'); backup.add_argument('--out', required=True)
+    restore = commands.add_parser('restore'); restore.add_argument('--from-backup', required=True)
     identity = commands.add_parser('issue-identity')
     for name in ['subject','tenant','role','token-file']: identity.add_argument('--'+name,required=True)
     revoke = commands.add_parser('revoke-identity'); revoke.add_argument('subject')
@@ -104,6 +107,15 @@ def main(argv=None):
     serve = commands.add_parser('serve'); serve.add_argument('--host',default='127.0.0.1'); serve.add_argument('--port',type=int,default=8767)
     args = parser.parse_args(argv)
     try:
+        from local_ops import inspect_database, copy_database
+        if args.command == 'doctor':
+            print(json.dumps(inspect_database(args.db))); return 0
+        if args.command in {'backup', 'restore'}:
+            result = (copy_database(args.db,args.out) if args.command == 'backup'
+                      else copy_database(args.from_backup,args.db))
+            print(json.dumps(result)); return 0
+        if args.command != 'init' and not Path(args.db).is_file():
+            raise ValueError('EXISTING_DATABASE_REQUIRED: run init explicitly')
         store = KnowledgeStore(args.db)
         if args.command=='init': result={'status':'INITIALIZED'}
         elif args.command=='issue-identity':

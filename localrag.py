@@ -11,6 +11,7 @@ import secrets
 import sqlite3
 import time
 from local_ingest import parse_file, source_bytes
+from rag import has_requested_value, words
 
 ROLES = {'viewer': 0, 'team': 1, 'admin': 2}
 STOP = set('what is are the a an for to how does in of our policy can i do when many which please tell me about'.split())
@@ -167,7 +168,9 @@ class KnowledgeStore:
             for rank, key in enumerate(ranking): scores[key] = scores.get(key,0)+1/(60+rank+1)
         ranked = sorted(scores, key=lambda key:(-scores[key],key))
         # A shared document title can retrieve a page, but cannot prove that page contains the answer.
-        supported = [key for key in ranked if query_terms and len(query_terms & terms(lookup[key]['text']))/len(query_terms) >= 0.8]
+        supported = [key for key in ranked if query_terms and
+                     len(query_terms & terms(lookup[key]['text']))/len(query_terms) >= 0.8 and
+                     has_requested_value(set(words(question)) & {'phone', 'email'}, lookup[key]['text'])]
         reason = 'INSUFFICIENT_EVIDENCE'
         if supported:
             best = lookup[supported[0]]
