@@ -23,3 +23,9 @@
 ## Historical public demo release
 
 GitHub lists `v1.0.0` (2026-09-23) for the public demo. The current source has no declared package version. The tag remains historical and will not be moved. The next source-only fix Release uses the next unused patch above it (currently `v1.0.1`), explicitly as a commit-bound source snapshot. An installable package needs a declared package/install contract first. It does not establish production ACL, answer quality, or customer use.
+
+## 2026-10-30 · Local operations and evidence values
+
+- Add read-only doctor, private SQLite online backup and no-overwrite restore; preserve committed WAL and identity revocation. Non-init CLI commands require an existing database.
+- Apply existing phone/email typed-value rules to local extraction; preserve original 62 candidate expectations and two semantic misses.
+- 55 Python and 36 Node tests; full local candidate 60/62, required lexical 60/60. Synthetic mechanics only.
