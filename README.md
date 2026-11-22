@@ -1,27 +1,44 @@
 # Enterprise RAG Starter
 
-面向需要把分散资料变成可追溯查询的团队：我实现了文档入库、版本与生效期、服务端身份过滤、引用定位和证据不足处理。可复用的交付是一个可检查的本地 CLI/HTTP 服务，以及与之分开的浏览器检索演示。
+**让知识库的回答有出处，答不了时说清原因。** 这是一套可复现的检索参考实现：用虚构资料验证从 MD/PDF/DOCX 入库、版本与生效期、服务端权限过滤，到原文摘录、引用定位和拒答的链路。它包含公开静态演示与独立本地服务，不连接生产资料或客户系统。
 
-[运行、备份与恢复](docs/OPERATIONS.md) · [三格式入库 QuickStart](docs/local-quickstart.md) · [权限与存储设计](docs/adr-local-rag.md)
-
-
-**LIVE_DEMO (lexical) + LOCAL semantic/hybrid + LOCAL file/identity library** · [Try the browser demo](https://zhouey314-cloud.github.io/enterprise-rag-starter/) · [Case study](docs/case-study.md) · [Resume bullets](docs/resume-bullets.md) · [Interview notes](docs/interview-notes.md)
-
-An inspectable RAG demo using entirely fictional enterprise documents. The online page is a lexical baseline; optional local Python modes use a real sentence-embedding model for semantic and hybrid retrieval. The lexical path selects a supported source sentence with citation or refuses. The optional semantic/hybrid path retains its separate, uncalibrated extraction behavior; embedding relevance alone does not establish answer support.
-
-![Real browser capture of the synthetic lexical query with extractive answer and citation](docs/images/demo-query.png)
-
-The image is a capture of the public lexical demo, not a generative model answer or production quality result.
-
-![Architecture](docs/images/architecture.svg)
+[打开在线演示](https://zhouey314-cloud.github.io/enterprise-rag-starter/) · [本地 CLI / HTTP Quickstart](docs/local-quickstart.md) · [运行、备份与恢复](docs/OPERATIONS.md) · [案例与取舍](docs/case-study.md)
 
 ## Demo
 
-Online lexical demo: <https://zhouey314-cloud.github.io/enterprise-rag-starter/>. Try support hours, refund policy, security, employee policy (public no-answer; team-scope fictional document visible), and no-answer. The page shows answer, source, retrieved chunks, scores, access and no-answer reason. Scope selection is illustrative, not real authentication.
+**不用登录或配置模型，先对比两条查询。** 打开在线演示并保持 Public scope：
 
-Python 3.10+: `python3 rag.py "What are the support hours?"`; `python3 rag.py "lunar engine warranty"`; `python3 evals/run.py`. For the full Python suite, first install `requirements-local.txt` in an isolated environment, then run `python3 -m unittest discover -s tests`; the file-format tests need the pinned PDF parser, with no model download.
+1. 搜 `What are the support hours?`：沿引用找到营业时间原句，核对回答与原文是否一致。
+2. 搜 `lunar engine warranty`：查看无答案及原因，不把检索不到的内容补写成答案。
 
-Local semantic/hybrid setup:
+页面展示命中片段、分数、来源和拒答原因。Scope 切换只演示过滤，不是登录或真实鉴权。这两条也可在本地词法 demo 复现（Python 3.10+，在仓库根目录执行；不需 API key 或模型下载）：
+
+```bash
+git clone https://github.com/zhouey314-cloud/enterprise-rag-starter.git
+cd enterprise-rag-starter
+python3 rag.py "What are the support hours?"
+python3 rag.py "lunar engine warranty"
+```
+
+![Real browser capture of the synthetic lexical query with extractive answer and citation](docs/images/demo-query.png)
+
+截图来自公开词法演示，不是生成模型输出或生产测试。
+
+### 三条运行路径，不混用验收结论
+
+| 路径 | 能验证什么 | 不代表什么 |
+| --- | --- | --- |
+| **公开网页 / Python 词法 demo** | 用自带的虚构文档比较有据摘录和拒答。 | 公网页面的 scope 不是认证。 |
+| **本地 CLI / HTTP 服务** | 用各自的本地身份查询；查看文档版本、访问过滤、来源和备份恢复。HTTP 只监听本机。 | 不含生产 IAM，也不在本路径使用 embedding 或生成模型。 |
+| **独立的 Python semantic / hybrid demo** | 可选本地 embedding 检索与排序，使用单独依赖和评测。 | 排名高不等于证据足；它不为身份服务提供语义能力，也不代表通过生成评测。 |
+
+### 工程证据与边界
+
+- [固定 CI 快照（`7fc40fb`）](https://github.com/zhouey314-cloud/enterprise-rag-starter/actions/runs/40997716764)：当次 55 项 Python 和 36 项 Node 检查，含 CLI/HTTP、权限及备份恢复；不是本页改版后的最新运行。
+- [失败与修复](FAILURE_ANALYSIS.md)：保留无关首句、标题命中但正文无证据、只提电话却没有号码等反例。
+- [本地候选评测](evals/LOCAL_EVAL_SPEC.md)：必需词法案例 60/60，全量 60/62，两条语义改写仍失败；案例为 `synthetic_unverified`，不是企业准确率或独立 Golden Set。生成模型未配置，生成质量 `NOT_RUN`。
+
+### Optional local semantic/hybrid setup
 
 ```bash
 python3 -m venv .venv
@@ -33,9 +50,15 @@ HF_HOME="$PWD/.model-cache" .venv/bin/python evals/modes.py
 
 The first semantic run downloads `sentence-transformers/all-MiniLM-L6-v2` from Hugging Face into the ignored local cache. No API key is needed. Without installed dependencies or model access, semantic/hybrid raise an error; they never silently become lexical.
 
+Use `python3 rag.py "What are the support hours?"`, `python3 rag.py "lunar engine warranty"`, or `python3 evals/run.py` for the no-model fixtures. Before running the full Python suite, install the pinned PDF parser from `requirements-local.txt` in an isolated environment and run `python3 -m unittest discover -s tests`; this does not download a model.
+
+[权限与存储设计](docs/adr-local-rag.md) · [项目贡献与简历素材](docs/resume-bullets.md) · [面试说明](docs/interview-notes.md)
+
 ## Problem and architecture
 
 Documents → parse → overlap chunk → metadata/access → lexical or local embedding cosine search → optional hybrid reciprocal-rank fusion → top-K selection → extractive answer + citation. The embedding adapter is replaceable; `LLMProvider` remains `NOT_CONFIGURED`, and no generative model runs. Access filtering happens before scoring in every mode. See [architecture](docs/architecture.md).
+
+![Architecture](docs/images/architecture.svg)
 
 ## Eval and verification
 
